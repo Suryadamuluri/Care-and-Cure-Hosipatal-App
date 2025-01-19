@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paid Bills</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 30px;
+            max-width: 80%;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+        }
+        .no-data-message {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+        }
+        .table-container {
+            margin-top: 30px;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+		/* Position the Go Back button at the bottom right */
+		       .go-back-btn {
+		           position: fixed;
+		           bottom: 20px;
+		           right: 20px;
+		           z-index: 9999; /* Ensure the button is on top */
+		       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Paid Bills</h1>
+
+        <!-- Date range form -->
+        <div class="search-container">
+            <form action="/paid" method="get" class="d-flex justify-content-end">
+                <input type="date" id="startDate" name="startDate" class="form-control me-2" value="${startDate}">
+                <input type="date" id="endDate" name="endDate" class="form-control me-2" value="${endDate}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+		<p th:if="${errorMessage != null}" style="color: red; text-align: right;" th:text="${errorMessage}"></p>
+
+
+
+        <!-- Paid Bills Table -->
+        <div th:if="${paidBills != null}">
+            <table class="table table-striped table-bordered table-hover table-container">
+                <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Patient Name</th>
+                        <th>Bill ID</th>
+                        <th>Total Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="bill : ${paidBills}">
+                        <td th:text="${bill.appointment.patientObj.patientId}"></td>
+                        <td th:text="${bill.appointment.patientObj.patientName}"></td>
+                        <td th:text="${bill.billId}"></td>
+                        <td th:text="${bill.totalAmount}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+	<!-- Go Back Button -->
+	<div style="text-align: center; margin-bottom: 20px;">
+		<a href="/admin/billinfo" >Back to Home</a>
+	</div>
+
+</body>
+</html>

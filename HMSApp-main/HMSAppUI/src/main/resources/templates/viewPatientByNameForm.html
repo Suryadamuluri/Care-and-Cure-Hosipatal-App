@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Patient By Name</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>View Patient By Name</h2>
+        <form action="#" th:action="@{/viewPatientByName}" method="get">
+            <div class="form-group">
+                <label for="patientName">Patient Name:</label>
+                <input type="text" class="form-control" id="patientName" name="name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+        <div th:if="${patients}">
+            <h3>Found Patients:</h3>
+            <ul>
+                <li th:each="patient : ${patients}">
+                    <strong th:text="${patient.patientName}"></strong> - <span th:text="${patient.contactNumber}"></span>
+                </li>
+            </ul>
+        </div>
+        
+        <div th:if="${error}">
+            <p th:text="${error}" class="text-danger"></p>
+        </div>
+		<div class="navigation">
+			<a th:href="${role == 'admin' ? '/admin/patientinfo' : '/patient'}" class="back-home">Back to Home</a>
+				 </div>
+		
+    </div>
+</body>
+</html>

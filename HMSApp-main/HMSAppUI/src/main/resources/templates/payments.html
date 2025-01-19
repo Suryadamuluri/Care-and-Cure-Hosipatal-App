@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Payments</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>All Payments</h1>
+
+        <!-- Filter Form -->
+        <form method="get" th:action="@{/admin/payments/viewAll}">
+            <div class="row mb-3">
+                <!-- Payment Date From -->
+                <div class="col">
+                    <label for="paymentDateFrom">Payment Date From</label>
+                    <input type="date" name="paymentDateFrom" class="form-control"
+                           th:value="${filter != null && filter.paymentDateFrom != null ? filter.paymentDateFrom : ''}" />
+                </div>
+                <!-- Payment Date To -->
+                <div class="col">
+                    <label for="paymentDateTo">Payment Date To</label>
+                    <input type="date" name="paymentDateTo" class="form-control"
+                           th:value="${filter != null && filter.paymentDateTo != null ? filter.paymentDateTo : ''}" />
+                </div>
+                <!-- Payment Status -->
+                <div class="col">
+                    <label for="paymentStatus">Payment Status</label>
+                    <input type="text" name="paymentStatus" class="form-control"
+                           placeholder="Payment Status"
+                           th:value="${filter != null && filter.paymentStatus != null ? filter.paymentStatus : ''}" />
+                </div>
+                <!-- Minimum Amount -->
+                <div class="col">
+                    <label for="minAmount">Min Amount</label>
+                    <input type="number" name="minAmount" class="form-control" placeholder="Min Amount"
+                           th:value="${filter != null && filter.minAmount != null ? filter.minAmount : ''}" />
+                </div>
+                <!-- Maximum Amount -->
+                <div class="col">
+                    <label for="maxAmount">Max Amount</label>
+                    <input type="number" name="maxAmount" class="form-control" placeholder="Max Amount"
+                           th:value="${filter != null && filter.maxAmount != null ? filter.maxAmount : ''}" />
+                </div>
+                <!-- Payment Method -->
+                <div class="col">
+                    <label for="paymentMethod">Payment Method</label>
+                    <input type="text" name="paymentMethod" class="form-control"
+                           placeholder="Payment Method"
+                           th:value="${filter != null && filter.paymentMethod != null ? filter.paymentMethod : ''}" />
+                </div>
+                <!-- Filter Button -->
+                <div class="col">
+                    <button type="submit" class="btn btn-primary btn-block">Filter</button>
+                </div>
+            </div>
+        </form>
+
+		<table class="table">
+		        <thead>
+		            <tr>
+		                <th>Payment Date</th>
+		                <th>Amount Paid</th>
+		                <th>Payment Method</th>
+		                <th>Payment Status</th>
+		                <th>Transaction ID</th>
+		                <th>Actions</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr th:each="payment : ${payments}">
+		                <td th:text="${payment.paymentDate}"></td>
+		                <td th:text="${payment.amountPaid}"></td>
+		                <td th:text="${payment.paymentMethod}"></td>
+		                <td th:text="${payment.paymentStatus}"></td>
+		                <td th:text="${payment.transactionId}"></td>
+		                <td>
+		                    <!-- Disable edit if payment status is not 'Paid' -->
+		                    <a th:href="@{/admin/payments/updatePayment/{id}(id=${payment.paymentId})}" 
+		                       th:classappend="${payment.paymentStatus == 'Paid' ? 'disabled' : ''}" 
+		                       class="btn btn-warning">Edit</a>
+		                </td>
+		            </tr>
+
+		            <!-- If no payments are found -->
+		            <tr th:if="${#lists.isEmpty(payments)}">
+		                <td colspan="6" class="text-center">No payments found.</td>
+		            </tr>
+		        </tbody>
+		    </table>
+
+		    <!-- Pagination Controls -->
+		    <div th:if="${totalPages > 1}">
+		        <ul class="pagination">
+		            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+		                <a class="page-link" th:href="@{/admin/payments/viewAll(page=0, size=10)}">First</a>
+		            </li>
+		            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+		                <a class="page-link" th:href="@{/admin/payments/viewAll(page=${currentPage - 1}, size=10)}">Previous</a>
+		            </li>
+		            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+		                <a class="page-link" th:href="@{/admin/payments/viewAll(page=${i}, size=10)}" 
+		                   th:text="${i + 1}"></a>
+		            </li>
+		            <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+		                <a class="page-link" th:href="@{/admin/payments/viewAll(page=${currentPage + 1}, size=10)}">Next</a>
+		            </li>
+		            <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+		                <a class="page-link" th:href="@{/admin/payments/viewAll(page=${totalPages - 1}, size=10)}">Last</a>
+		            </li>
+		        </ul>
+		    </div>
+			<a href="/admin/paymentinfo" >Back to Home</a>
+</body>
+</html>

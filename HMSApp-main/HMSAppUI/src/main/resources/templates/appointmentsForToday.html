@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Appointments for Today</title>
+</head>
+<body>
+<h1>Appointments for Today</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Appointment ID</th>
+            <th>Patient Name</th>
+            <th>Appointment Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.appointmentId}"></td>
+            <td th:text="${appointment.patientObj.patientName}"></td>
+            <td th:text="${appointment.appointmentDate}"></td>
+            <td th:text="${appointment.startTime}"></td>
+            <td th:text="${appointment.endTime}"></td>
+            <td th:text="${appointment.status}"></td>
+        </tr>
+    </tbody>
+</table>
+<a href="/admin/appointmentinfo" class="btn btn-secondary mt-3">Back to Home</a>
+</body>
+</html>

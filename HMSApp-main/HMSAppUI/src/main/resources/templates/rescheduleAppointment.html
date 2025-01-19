@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reschedule Appointment</title>
+</head>
+<body>
+    <h1>Reschedule Appointment</h1>
+    
+    <!-- Display the current appointment details -->
+    <div th:if="${appointment}">
+        <h2>Current Appointment Details</h2>
+        <p><strong>ID:</strong> <span th:text="${appointment.appointmentId}"></span></p>
+        <p><strong>Date:</strong> <span th:text="${appointment.appointmentDate}"></span></p>
+        <p><strong>Start Time:</strong> <span th:text="${appointment.startTime}"></span></p>
+        <p><strong>End Time:</strong> <span th:text="${appointment.endTime}"></span></p>
+        <p><strong>Reason For Visit:</strong> <span th:text="${appointment.reasonForVisit}"></span></p>
+    </div>
+
+    <!-- Form to reschedule the appointment -->
+    <h2>Reschedule Form</h2>
+    <form th:action="@{/rescheduleAppointment}" method="post">
+		<input type="text" id="appointmentId" name="appointmentId" th:value="${id}" />
+        <label for="newDate">New Date:</label>
+        <input type="date" id="newDate" name="newDate" required>
+        <br>
+        <label for="newTime">New Time:</label>
+        <input type="time" id="newTime" name="newTime" required>
+        <br><br>
+        <button type="submit">Reschedule</button>
+    </form>
+
+    <!-- Display success or error messages -->
+    <div th:if="${message}">
+        <p th:text="${message}" style="color: green;"></p>
+    </div>
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}" style="color: red;"></p>
+    </div>
+
+    <!-- Back to view appointment -->
+    <br>
+    <a th:href="@{/rescheduleGetAppIdForm}">Back to Home</a>
+</body>
+</html>

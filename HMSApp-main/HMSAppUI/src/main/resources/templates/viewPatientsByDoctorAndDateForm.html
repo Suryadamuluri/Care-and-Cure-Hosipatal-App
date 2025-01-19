@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Patients by Doctor and Date</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>View Patients by Doctor and Date</h2>
+        <form action="#" th:action="@{/viewPatientsByDoctorAndDate}" method="get">
+            <div class="form-group">
+                <label for="doctorId">Doctor ID:</label>
+                <input type="number" class="form-control" id="doctorId" name="doctorId" required>
+            </div>
+            <div class="form-group">
+                <label for="appDate">Appointment Date:</label>
+                <input type="date" class="form-control" id="appDate" name="appDate" required>
+            </div>
+            <button type="submit" class="btn btn-primary">View Patients</button>
+        </form>
+		
+		
+		<!-- Display Error Message if No appointments Found -->
+		    <div th:if="${error}">
+		        <p style="color: red;" th:text="${error}"></p>
+		    </div>
+
+		<a href="/admin/patientinfo" class="btn btn-secondary mt-3">Back to Home</a>
+    </div>
+</body>
+</html>

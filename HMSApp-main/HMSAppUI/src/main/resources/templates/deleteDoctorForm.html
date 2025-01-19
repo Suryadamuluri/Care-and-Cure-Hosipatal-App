@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Delete Doctor</title>
+    <style>
+        /* Reset body margin and padding */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Center content */
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Heading style */
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Label style */
+        label {
+            display: block;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        /* Input field style */
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        /* Button style */
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Success and error messages */
+        p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        .navigation {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-bottom: 2px solid #007bff;
+        }
+
+      
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Deactivate Doctor</h1>
+
+        <!-- Form to delete doctor -->
+        <form action="/doctors/deleteDoctor" method="post">
+            <label for="doctorId">Enter Doctor ID:</label>
+            <input type="number" id="doctorId" name="doctorId" required>
+            <button type="submit">Deactivate Doctor</button>
+        </form>
+
+        <!-- Display success message if available -->
+        <p th:if="${successMessage}" th:text="${successMessage}" style="color: green;"></p>
+
+        <!-- Display error message if available -->
+        <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
+    </div>
+	<div class="navigation">
+				            <a th:href="@{/admin}" class="back-home">Back to Home</a>
+				 </div>
+
+</body>
+</html>
+

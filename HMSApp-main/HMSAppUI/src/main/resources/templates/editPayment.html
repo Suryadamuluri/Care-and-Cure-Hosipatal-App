@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Edit Payment</h1>
+		<form th:action="@{/admin/payments/updatePayment/{id}(id=${payment.paymentId})}" method="post">
+		    <input type="hidden" name="paymentId" th:value="${payment.paymentId}">
+		    
+		    <!-- Payment Date Field -->
+			<div class="form-group">
+			    <label for="paymentDate">Payment Date</label>
+			    <input type="date" id="paymentDate" name="paymentDate" class="form-control" th:value="${payment.paymentDate}" readonly required>
+			</div>
+
+		    <!-- Amount Paid Field -->
+		    <div class="form-group">
+		        <label for="amountPaid">Amount Paid</label>
+		        <input type="number" id="amountPaid" name="amountPaid" class="form-control" th:value="${payment.amountPaid}" required>
+		    </div>
+
+		    <!-- Payment Method Field -->
+		    <div class="form-group">
+		        <label for="paymentMethod">Payment Method</label>
+		        <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" th:value="${payment.paymentMethod}" required>
+		    </div>
+
+		    <!-- Payment Status Field -->
+		    <div class="form-group">
+		        <label for="paymentStatus">Payment Status</label>
+		        <input type="text" id="paymentStatus" name="paymentStatus" class="form-control" th:value="${payment.paymentStatus}" required>
+		    </div>
+
+		    <!-- Transaction ID Field (Disabled if Paid) -->
+			<div class="form-group">
+			    <label for="transactionId">Transaction ID</label>
+			    <input type="text" id="transactionId" name="transactionId" class="form-control" th:value="${payment.transactionId}" readonly required>
+			</div>
+
+		  
+		    <button type="submit" class="btn btn-primary">Update Payment</button>
+		</form>
+    </div>
+</body>
+</html>

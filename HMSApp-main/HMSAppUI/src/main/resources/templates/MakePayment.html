@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 2rem;
+            font-size: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info {
+            margin-bottom: 1.5rem;
+        }
+
+        .info p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .info span {
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select {
+            margin-bottom: 1.5rem;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 0.8rem;
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Make Payment</h1>
+    <div class="container">
+        <!-- Display dynamic bill information -->
+        <div class="info">
+            <p><span>Bill ID:</span> <span th:text="${billId}"></span></p>
+            <p><span>Total Amount:</span> ₹<span th:text="${totalAmount}"></span></p>
+            <p><span>Total Paid:</span> ₹<span th:text="${totalPaid}"></span></p>
+            <p><span>Outstanding Amount:</span> ₹<span th:text="${paymentAmount}"></span></p>
+        </div>
+
+        <!-- Form for submitting the payment -->
+        <form th:action="@{/submit-payment}" method="post">
+            <input type="hidden" name="billId" th:value="${billId}"/>
+            <input type="hidden" name="outstandingAmount" th:value="${paymentAmount}"/>
+
+            <label for="paymentAmount">Payment Amount:</label>
+            <input type="number" id="paymentAmount" name="paymentAmount" 
+                   th:attr="max=${paymentAmount}" placeholder="Enter amount to pay" required />
+
+            <label for="paymentMethod">Payment Method:</label>
+            <select id="paymentMethod" name="paymentMethod" required>
+                <option value="" disabled selected>Select payment method</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Net Banking">Net Banking</option>
+                <option value="UPI">UPI</option>
+                <option value="Cash">Cash</option>
+            </select>
+
+            <button type="submit">Submit Payment</button>
+        </form>
+		
+		<div class="container">
+		    <!-- Display success message -->
+		    <div class="success" th:if="${message}" style="color: green; font-weight: bold; margin-bottom: 1rem;">
+		        <p th:text="${message}"></p>
+		    </div>
+
+		    <!-- Existing form content -->
+		</div>
+		<a href="/patient/pending" class="btn btn-primary btn-back">Back to Home</a>
+		<!-- Modal Trigger -->
+		<div id="paymentSuccessModal" style="display: none;">
+		    <div style="
+		        position: fixed; 
+		        top: 0; 
+		        left: 0; 
+		        width: 100%; 
+		        height: 100%; 
+		        background-color: rgba(0,0,0,0.5); 
+		        display: flex; 
+		        justify-content: center; 
+		        align-items: center;">
+		        <div style="
+		            background-color: white; 
+		            padding: 2rem; 
+		            border-radius: 8px; 
+		            text-align: center;">
+		            <h2 style="color: green;">Payment Successful!</h2>
+		            <p>Your payment of ₹<span id="paidAmount"></span> was processed successfully.</p>
+		            <button onclick="closeModal()" 
+		                    style="padding: 0.8rem; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+		                OK
+		            </button>
+		        </div>
+		    </div>
+		</div>
+
+		<script>
+		    // JavaScript to handle modal display
+		    function showModal(paymentAmount) {
+		        document.getElementById('paidAmount').textContent = paymentAmount;
+		        document.getElementById('paymentSuccessModal').style.display = 'flex';
+		    }
+
+		    function closeModal() {
+		        document.getElementById('paymentSuccessModal').style.display = 'none';
+		        window.location.href = "/home"; // Redirect after closing the modal
+		    }
+		</script>
+
+
+        <!-- Error message if any -->
+        <div class="error" th:if="${error}" th:text="${error}"></div>
+    </div>
+</body>
+</html>

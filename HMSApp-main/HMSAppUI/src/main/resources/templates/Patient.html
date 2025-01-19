@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Bills</title>
+    <style>
+        /* Inline CSS for improved UI */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 2rem;
+            font-size: 2rem;
+        }
+
+        table {
+            width: 80%;
+            margin: 2rem auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0047ab;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        td a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        td a:hover {
+            background-color: #218838;
+        }
+
+        td a:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 768px) {
+            table {
+                width: 100%; /* Full width on smaller screens */
+                margin: 1rem;
+            }
+
+            th, td {
+                padding: 0.8rem;
+            }
+        }
+
+        /* Styling for the 'View Past Bill History' link at the top-right */
+        .view-history {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .view-history a {
+            background-color: #007bff;
+            padding: 0.5rem 1rem;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .view-history a:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="view-history">
+		<a th:href="@{/paidbills/{patientId}(patientId=${patientId})}">Paid Bills</a>
+
+    </div>
+
+    <h1>Pending Bills</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Bill ID</th>
+                <th>Total Amount</th>
+                <th>Total Paid</th>
+                <th>Outstanding Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="bill : ${pendingBills}">
+                <td th:text="${bill.billId}"></td>
+                <td th:text="${bill.totalAmount}"></td>
+                <td th:text="${bill.totalPaid}"></td>
+                <td th:text="${bill.totalAmount - bill.totalPaid}"></td>
+                
+					<td>
+					    <a th:href="@{/make-payment(billId=${bill.billId}, totalAmount=${bill.totalAmount}, totalPaid=${bill.totalPaid}, outstandingAmount=${bill.totalAmount - bill.totalPaid})}" 
+					       th:if="${bill.totalAmount - bill.totalPaid > 0}">
+					        Make Payment
+					    </a>
+					</td>
+
+               
+            </tr>
+        </tbody>
+    </table>
+ <!-- Go Back Button -->
+
+ <a href="/patient/billinfo" >Back to Home</a>
+</body>
+</html>

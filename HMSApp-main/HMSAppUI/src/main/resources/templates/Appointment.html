@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            height: 100vh;
+            background-image: url('https://www.rideaufht.ca/wp-content/uploads/2016/07/AdobeStock_92345619.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: lightblue;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        form input, form select, form textarea, form button {
+            width: 490px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: black;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+	
+	
+    <h1>Book Appointment</h1>
+    <form th:action="@{/bookAppointment}" th:object="${appointment}" method="post">
+        <div>
+            <div>
+                <label for="doctorObj">Doctor</label>
+                <select name="doctorId" id="doctorId">
+            <option value="">Select a Doctor</option>
+            <th:block th:each="doctor : ${doctors}">
+                <option th:value="${doctor.doctorId}" th:text="${doctor.doctorName}"></option>
+            </th:block>
+        </select>
+                <div th:if="${#fields.hasErrors('doctorObj')}" th:errors="*{doctorObj}"></div>
+            </div>
+        </div>
+
+        <div>
+            <label for="patientId">Patient ID</label>
+            <input type="text" name="patientId" id="patientId" required pattern="[0-9]*" />
+            
+        </div>
+
+        <div>
+            <label for="appointmentDate">Appointment Date</label>
+            <input type="date" th:field="*{appointmentDate}" id="appointmentDate"  />
+            
+            
+       <div th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}" style="color:red"></div>
+       
+        </div>
+
+        <div>
+            <label for="startTime">Start Time</label>
+            <input type="time" id="startTime" th:field="*{startTime}" th:value="${appointment.startTime}" />
+            <div th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}" style="color:red"></div>
+			<div id="timeError" style="color:red;"></div>
+		</div>
+		<script>
+		    const startTimeInput = document.getElementById('startTime');
+		    const timeErrorDiv = document.getElementById('timeError');
+
+		    startTimeInput.addEventListener('change', function () {
+		        const startTime = startTimeInput.value;
+
+		        // Check if the time is outside the valid range
+		        if (startTime < "09:00" || startTime > "16:00") {
+		            timeErrorDiv.textContent = "Start time must be between 09:00 and 16:00.";
+		            startTimeInput.value = ""; // Clear only the invalid field
+		        } else {
+		            timeErrorDiv.textContent = ""; // Clear the error message
+		        }
+		    });
+		</script>
+
+        <div>
+            <label for="reasonForVisit">Reason for Visit</label>
+            <input type="text" th:field="*{reasonForVisit}" />
+            <div th:if="${#fields.hasErrors('reasonForVisit')}" th:errors="*{reasonForVisit}" style="color:red"></div>
+        </div>
+
+        <button type="submit">Book Appointment</button>
+    </form>
+
+    <div th:if="${message}">
+        <p th:text="${message}"></p>
+    </div>
+    
+    <div>
+    	<a href="/patient/appointmentinfo" class="btn btn-secondary">Back to Home</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Appointment</title>
+</head>
+<body>
+    <h1>Appointment Management</h1>
+    <a th:href="@{/AppointmentForm}">Add Appointment</a><br>
+    <a th:href="@{/viewAppointmentByIdForm}">View Appointment by ID</a><br>
+	<a th:href="@{/cancel}">Cancel Appointment</a><br>
+    <a th:href="@{/rescheduleGetAppIdForm}">Reschedule Appointment By Id</a><br>
+	<a href="/patientsWithAppointmentToday">View Patients with Appointments Today</a><br>
+	<a th:href="@{/updateAppointmentForm}">Update Appointment</a><br>
+	<a href="/viewAppointmentsForCurrentDate">View Appointments for Today</a>
+	
+	
+    <div th:if="${message}">
+        <p th:text="${message}"></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Bill</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Update Bill</h2>
+
+        <!-- Error Message -->
+        <div th:if="${errorMessage}" class="alert alert-danger">
+            <span th:text="${errorMessage}"></span>
+        </div>
+
+        <!-- Success Message -->
+        <div th:if="${successMessage}" class="alert alert-success">
+            <span th:text="${successMessage}"></span>
+        </div>
+
+        <!-- Update Bill Form -->
+		<form action="/updateBill" method="post">
+		    <input type="hidden" name="billId" th:value="${bill.billId}" />
+
+		    <div class="form-group">
+		        <label for="description">Description</label>
+		        <input 
+		            type="text" 
+		            name="description" 
+		            class="form-control" 
+		            th:value="${bill.description}" 
+		            readonly 
+		            style="background-color: #f8f9fa; cursor: not-allowed;" 
+		        />
+		    </div>
+
+		    <div class="form-group">
+		        <label for="consultationFees">Consultation Fees</label>
+		        <input type="number" name="consultationFees" class="form-control" th:value="${bill.consultationFees}" required />
+		    </div>
+
+		    <div class="form-group">
+		        <label for="medicineFees">Medicine Fees</label>
+		        <input type="number" name="medicineFees" class="form-control" th:value="${bill.medicineFees}" required />
+		    </div>
+			
+			<div class="form-group">
+				        <label for="medicineFees">BillID</label>
+				        <input type="number" name="medicineFees" class="form-control" th:value="${bill.billId}" required />
+				    </div>
+
+		    <div class="form-group">
+		        <label for="testCharge">Test Charge</label>
+		        <input type="number" name="testCharge" class="form-control" th:value="${bill.testCharge}" required />
+		    </div>
+
+		    <button type="submit" class="btn btn-success">Update Bill</button>
+		</form>
+
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- Go Back Button -->
+	       <div class="text-center" style="margin-top: 40px;">
+	           <a href="/admin/billinfo" class="btn btn-secondary">Back to Home</a>
+	       </div>
+
+</body>
+</html>

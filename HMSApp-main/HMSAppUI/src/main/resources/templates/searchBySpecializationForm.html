@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Doctor by Specialization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table thead tr {
+            background-color: #4CAF50;
+            color: white;
+        }
+        table th, table td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Search Doctor by Specialization</h2>
+
+<form th:action="@{/searchBySpecialization}" method="get">
+    <label for="specialization">Specialization:</label>
+    <input type="text" name="specialization" required /><br>
+
+    <button type="submit">Search</button>
+</form>
+
+<div th:if="${doctors}">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Contact Number</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Fees</th>
+                <th>Date of Joining</th>
+                <th>Years of Experience</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="doctor : ${doctors}">
+                <td th:text="${doctor.doctorName}"></td>
+                <td th:text="${doctor.specialization}"></td>
+                <td th:text="${doctor.contactNumber}"></td>
+                <td th:text="${doctor.gender}"></td>
+                <td th:text="${doctor.emailId}"></td>
+                <td th:text="${doctor.location}"></td>
+                <td th:text="${doctor.consultationFees}"></td>
+                <td th:text="${doctor.dateOfJoining}"></td>
+                <td th:text="${doctor.yearsOfExperience}"></td>
+                <td th:text="${doctor.status ? 'Active' : 'Inactive'}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+<div class="navigation">
+	<a th:href="${role == 'admin' ? '/admin' : '/patient'}" class="back-home">Back to Home</a>
+		 </div>
+
+</body>
+</html>
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Appointment by ID</title>
+</head>
+<body>
+    <h1>View Appointment by ID</h1>
+    <!-- Form to get Appointment ID -->
+    <form th:action="@{/getAppointmentById}" method="get">
+        <label for="appointmentId">Enter Appointment ID:</label>
+        <input type="text" id="appointmentId" name="appointmentId" >
+        <button type="submit">View Appointment</button>
+		<div th:if="${errorMessage}" style="color: red;">
+			       <p th:text="${errorMessage}"></p>
+		</div>
+
+    </form>
+	
+	 <a href="/patient/appointmentinfo" class="btn btn-secondary">Back to Home</a>
+	
+</body>

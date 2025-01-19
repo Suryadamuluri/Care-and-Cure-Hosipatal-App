@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Doctors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2>All Doctors</h2>
+
+<div th:if="${doctors}">
+    <table>
+        <thead>
+            <tr>
+				<th>ID</th>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Contact Number</th>
+				<th>Gender</th>
+                <th>Email</th>
+                <th>Location</th>
+				<th>Fees</th>
+				<th>Date of Joining</th>
+				<th>Years of experience</th>
+				<th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="doctor : ${doctors}">
+				<td th:text="${doctor.doctorId}"></td>
+				<td th:text="${doctor.doctorName}"></td>
+				 <td th:text="${doctor.specialization}"></td>
+				                <td th:text="${doctor.contactNumber}"></td>
+								<td th:text="${doctor.gender}"></td>
+				                <td th:text="${doctor.emailId}"></td>
+				                <td th:text="${doctor.location}"></td>
+								<td th:text="${doctor.consultationFees}"></td>
+								<td th:text="${doctor.dateOfJoining}"></td>
+								<td th:text="${doctor.yearsOfExperience}"></td>
+								<td th:text="${doctor.status ? 'Active' : 'Inactive'}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${error}">
+    <p class="error-message" th:text="${error}"></p>
+</div>
+<div class="navigation">
+				            <a th:href="@{/admin}" class="back-home">Back to Home</a>
+		 </div>
+
+</body>
+</html>
+
+

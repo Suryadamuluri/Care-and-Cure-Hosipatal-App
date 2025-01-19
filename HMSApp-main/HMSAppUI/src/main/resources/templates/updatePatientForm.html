@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Patient</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%; /* Make the input field take the full width of the container */
+            padding: 8px 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .navigation {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .navigation .back-home {
+            text-decoration: none;
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .navigation .back-home:hover {
+            background-color: rgb(0, 64, 64);
+        }
+        div[th\\:if] {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        p[style*="color: red"] {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Fetch Patient by ID</h2>
+
+    <div class="form-container">
+        <!-- Form to fetch patient details by ID -->
+        <form th:action="@{/fetchPatientForUpdate}" method="get">
+            <label for="patientId">Patient ID:</label>
+            <input id="patientId" name="patientId" type="text" required />
+            <button type="submit">Fetch Patient</button>
+        </form>
+    </div>
+
+    <div class="navigation">
+        <a th:href="${role == 'admin' ? '/admin/patientinfo' : '/patient/patientinfo'}" class="back-home">Back to Home</a>
+    </div>
+
+    <!-- Display error if available -->
+    <div th:if="${error}">
+        <p style="color: red;" th:text="${error}"></p>
+    </div>
+</body>
+</html>

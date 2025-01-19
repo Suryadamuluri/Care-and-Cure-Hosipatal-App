@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Payments</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f7fc;
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .table th, .table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .table td {
+            background-color: #fff;
+        }
+        .btn-back {
+            width: 150px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .empty-message {
+            text-align: center;
+            color: #6c757d;
+        }
+        h2 {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Payments Made</h2>
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Amount Paid</th>
+                    <th>Payment Date</th>
+                    <th>Payment Method</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="payment : ${payments}">
+                    <td th:text="${payment.transactionId}"></td>
+                    <td th:text="${payment.amountPaid}"></td>
+                    <td th:text="${payment.paymentDate}"></td>
+                    <td th:text="${payment.paymentMethod}"></td>
+                    <td th:text="${payment.paymentStatus}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${#lists.isEmpty(payments)}" class="empty-message">
+        <p>No payments found for this patient.</p>
+    </div>
+
+    <a href="/patient/paymentinfo" class="btn btn-primary btn-back">Back to Home</a>
+</div>
+
+</body>
+</html>

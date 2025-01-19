@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patients with Appointments Today</title>
+    <style>
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Patients with Appointments Today</h1>
+
+<!-- Error Message -->
+<div th:if="${errorMessage != null}">
+<p th:text="${errorMessage}" class="error-message"></p>
+</div>
+<!-- Table Content -->
+<div th:if="${errorMessage == null}">
+<div th:if="${patients != null && patients.size() > 0}">
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Patient ID</th>
+                <th>Patient Name</th>
+		<th>Gender</th>
+		<th>Location</th>
+                <th>Email ID</th>
+                <th>Contact Number</th>
+            </tr>
+        </thead>
+        <tbody>
+			
+            <tr th:each="patient : ${patients}">
+		<td th:text="${patient.patientId}"></td>
+                <td th:text="${patient.patientName}"></td>
+                <td th:text="${patient.gender}"></td>
+		<td th:text="${patient.location}"></td>
+		<td th:text="${patient.emailId}"></td>
+		<td th:text="${patient.contactNumber}"></td>
+								
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<a href="/admin/appointmentinfo" class="btn btn-secondary mt-3">Back to Home</a>
+</body>
+</html>

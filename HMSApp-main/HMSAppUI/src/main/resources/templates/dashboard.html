@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management Dashboard</title>
+    <style>
+        /* Inline CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .navbar {
+            background-color: #0047ab;
+            padding: 1rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .dashboard-container {
+            padding: 2rem;
+            margin: 0 10%; /* Adds space on the left and right */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 2rem;  /* Increased padding */
+            margin: 1.5rem; /* Increased margin for more space between cards */
+            text-align: center;
+            flex: 1; /* Ensures cards take up equal space */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            width: calc(50% - 2rem); /* Set width to 50% minus margin for spacing */
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 1.75rem; /* Increased font size */
+            font-weight: bold;
+            margin-bottom: 1.5rem; /* Increased margin for spacing */
+            color: #333;
+        }
+
+        .card-link {
+            color: #0047ab;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .card-link:hover {
+            text-decoration: underline;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 768px) {
+            .cards {
+                flex-direction: column; /* Stacks cards vertically on smaller screens */
+            }
+
+            .card {
+                width: 100%;  /* Full width for cards on smaller screens */
+                margin: 10px 0; /* Adjust margin for smaller screens */
+            }
+
+            .dashboard-container {
+                margin: 0 5%; /* Less space on smaller screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="images/llll.jpg" alt="Hospital Logo" style="height: 40px;" th:src="@{/images/llll.jpg}">
+        </div>
+        <div class="nav-links">
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/patients}">Patients</a>
+            <a th:href="@{/appointments}">Appointments</a>
+            <a th:href="@{/doctors}">Doctors</a>
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <h1>BILL PAGE</h1>
+        <div class="cards">
+            <!-- Card 4: View All Bills -->
+            <div class="card">
+                <div class="card-title">View All Bills</div>
+                <a th:href="@{/viewBills}" class="card-link">View All Bills</a>
+            </div>
+			<div class="card">
+			                <div class="card-title">View Paid bills</div>
+							<a th:href="@{/paid}">View Paid Bills</a>
+			            </div>
+			
+            <div class="card">
+                <div class="card-title">View Unpaid Billspatient</div>
+                <a th:href="@{/patient/{patientId}/pending(patientId=201)}" class="card-link">View Unpaid</a>
+            </div>
+        </div>
+        <div class="cards">
+            <!-- Card 6: View Paid Bills -->
+            <div class="card">
+                <div class="card-title">View UnpaidBill</div>
+                <a th:href="@{/patients/pending}" class="card-link">View Paid</a>
+            </div>
+
+            <!-- Card 7: Generate Bill -->
+            <div class="card">
+                <div class="card-title">Generate Bill</div>
+                <a th:href="@{/addBillForm}" class="card-link">Generate</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

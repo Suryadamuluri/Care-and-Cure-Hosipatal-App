@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Add Payment</title>
+</head>
+<body>
+    <h2>Add Payment</h2>
+    
+    <!-- Form to Add Payment -->
+    <form th:action="@{/payments/add}" th:object="${payment}" method="post">
+        <div>
+            <label for="transactionId">Transaction ID</label>
+            <input type="text" id="transactionId" th:field="*{transactionId}" placeholder="Enter Transaction ID" required />
+        </div>
+
+        <div>
+            <label for="amountPaid">Amount Paid</label>
+            <input type="number" id="amountPaid" th:field="*{amountPaid}" placeholder="Enter Amount Paid" required />
+        </div>
+
+        <div>
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod" th:field="*{paymentMethod}" required>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Net Banking">Net Banking</option>
+                <option value="UPI">UPI</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="paymentStatus">Payment Status</label>
+            <select id="paymentStatus" th:field="*{paymentStatus}" required>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+                <option value="Failed">Failed</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="billId">Bill ID</label>
+            <!-- You can fetch bill IDs from the database or manually input for now -->
+            <input type="number" id="billId" th:field="*{billObj.billId}" placeholder="Enter Bill ID" required />
+        </div>
+
+        <div>
+            <button type="submit">Add Payment</button>
+        </div>
+    </form>
+
+    <a href="/admin/payments/viewAll">Back to View All Payments</a>
+</body>
+</html>

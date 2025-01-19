@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View All Patients</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>All Patients</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Allergies</th>
+                    <th>Medications</th>
+                    <th>Treatments</th>
+                    <th>Medical History</th>
+                    <th>Others</th>
+					<th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="patient : ${patients}">
+                    <td th:text="${patient.patientId}"></td>
+                    <td th:text="${patient.patientName}"></td>
+                    <td th:text="${patient.contactNumber}"></td>
+                    <td th:text="${patient.dateOfBirth}"></td>
+                    <td th:text="${patient.gender}"></td>
+                    <td th:text="${patient.emailId}"></td>
+                    <td th:text="${patient.location}"></td>
+                    <td th:text="${patient.allergies}"></td>
+                    <td th:text="${patient.medications}"></td>
+                    <td th:text="${patient.treatments}"></td>
+                    <td th:text="${patient.medicalHistory}"></td>
+                    <td th:text="${patient.others}"></td>
+					<td th:text="${patient.status}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+</body>
+</html>

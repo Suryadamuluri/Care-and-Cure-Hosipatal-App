@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Appointment Info</title>
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .functionality-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .functionality-list li {
+            margin: 15px 0;
+        }
+
+        .functionality-list a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 20px;
+            font-weight: 500;
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .functionality-list a:hover {
+            text-decoration: underline;
+            background-color: #e0f7fa;
+            color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+        }
+
+        .functionality-list a:active {
+            background-color: #b3e0ff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .functionality-list a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Appointment Info</h1>
+        <ul class="functionality-list">
+            <li><a th:href="@{/patientsWithAppointmentToday}">Get Patients with Appointment Current Day</a></li>
+            <li><a th:href="@{/viewAppointmentsForCurrentDate}">View Appointments for Current Date</a></li>
+        </ul>
+		<a href="/admin" class="btn btn-secondary mt-3">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Add Payment</h1>
+        <form action="/admin/payments/add" method="post">
+            <div class="form-group">
+                <label for="paymentDate">Payment Date</label>
+                <input type="date" id="paymentDate" name="paymentDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="amountPaid">Amount Paid</label>
+                <input type="number" id="amountPaid" name="amountPaid" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method</label>
+                <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="paymentStatus">Payment Status</label>
+                <input type="text" id="paymentStatus" name="paymentStatus" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="transactionId">Transaction ID</label>
+                <input type="text" id="transactionId" name="transactionId" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="billId">Bill</label>
+                <select id="billId" name="billId" class="form-control" required>
+                    <option th:each="bill : ${bills}" th:value="${bill.billId}" th:text="${bill.description}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Payment</button>
+        </form>
+    </div>
+</body>
+</html>

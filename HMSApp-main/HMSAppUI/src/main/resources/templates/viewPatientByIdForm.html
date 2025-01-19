@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Patient By ID</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>View Patient By ID</h2>
+        
+        <!-- Error message -->
+        <div th:if="${error}" class="text-danger">
+            <p th:text="${error}"></p> <!-- Display the error message -->
+        </div>
+
+        <!-- Form to enter Patient ID -->
+        <form action="#" th:action="@{/viewPatientById}" method="get">
+            <div class="form-group">
+                <label for="patientId">Patient ID:</label>
+                <input type="number" class="form-control" id="patientId" name="patientId" required>
+            </div>
+            <button type="submit" class="btn btn-primary">View Patient</button>
+        </form>
+		<div class="navigation">
+			<a th:href="${role == 'admin' ? '/admin/patientinfo' : '/patient'}" class="back-home">Back to Home</a>
+				 </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Bills</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .table-container {
+            margin-top: 30px;
+        }
+        .search-container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5">View Bills</h2>
+
+		<!-- Display error messages -->
+		
+
+
+        <!-- Filter Form -->
+        <div class="search-container d-flex justify-content-end">
+            <form id="searchForm" method="get" action="/viewBills" class="d-flex">
+                <input 
+                    type="number" 
+                    id="billId" 
+                    name="billId" 
+                    class="form-control me-2" 
+                    placeholder="Enter Bill ID" 
+                    style="width: 250px;"
+                >
+                <input 
+                    type="date" 
+                    id="startDate" 
+                    name="startDate" 
+                    class="form-control me-2"
+                >
+                <input 
+                    type="date" 
+                    id="endDate" 
+                    name="endDate" 
+                    class="form-control me-2"
+                >
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+		<!-- Display error messages -->
+		<p th:if="${errorMessage != null}" style="color: red; text-align: right;" th:text="${errorMessage}"></p>
+
+
+        <!-- Display Bills -->
+        <div th:if="${bills != null}">
+            <table class="table table-striped table-bordered table-hover table-container">
+                <thead>
+                    <tr>
+                        <th>Bill ID</th>
+                        <th>Appointment ID</th>
+                        <th>Patient Name</th>
+                        <th>Bill Date</th>
+                        <th>Consultation Fees</th>
+                        <th>Medicine Fees</th>
+                        <th>Test Charge</th>
+                        <th>Miscellaneous Charges</th>
+                        <th>Description</th>
+                        <th>Discount Percentage</th>
+                        <th>Taxes</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through bills and display each -->
+                    <tr th:each="bill : ${bills}">
+                        <td th:text="${bill.billId}"></td>
+                        <td th:text="${bill.appointment.appointmentId}"></td>
+                        <td th:text="${bill.appointment.patientObj.patientName}"></td>
+                        <td th:text="${bill.billDate}"></td>
+                        <td th:text="${bill.consultationFees}"></td>
+                        <td th:text="${bill.medicineFees}"></td>
+                        <td th:text="${bill.testCharge}"></td>
+                        <td th:text="${bill.miscellaneousCharge}"></td>
+                        <td th:text="${bill.description}"></td>
+                        <td th:text="${bill.discountPercentage}"></td>
+                        <td th:text="${bill.taxes}"></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Error Message Display if no bills -->
+        <div th:if="${bills == null}">
+            <div class="alert alert-danger">
+                <span>No bills found matching the criteria.</span>
+            </div>
+        </div>
+    </div>
+	<!-- Go Back Button -->
+	<div style="text-align: center; margin-bottom: 20px;">
+		
+		<a href="/admin/billinfo" >Back to Home</a>
+	</div>
+
+</body>
+</html>

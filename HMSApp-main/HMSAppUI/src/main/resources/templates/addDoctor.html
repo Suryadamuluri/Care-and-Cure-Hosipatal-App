@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            width: auto;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .alert-success {
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            color: #3c763d;
+        }
+        .alert-danger {
+            background-color: #f2dede;
+            border: 1px solid #ebccd1;
+            color: #a94442;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        .form-group input, .form-group select {
+            max-width: 500px;
+        }
+        .navigation {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-bottom: 2px solid #007bff;
+        }        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Doctor</h2>
+
+        <!-- Success and Error Messages -->
+        <div th:if="${message}" class="alert alert-success">
+            <p th:text="${message}"></p>
+        </div>
+        <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
+        </div>
+
+        <!-- Doctor Form -->
+        <form th:action="@{/doctors/addDoctor}" th:object="${doctor}" method="post">
+            
+            <!-- Doctor Name -->
+            <div class="form-group">
+                <label for="doctorName">Doctor Name</label>
+                <input type="text" id="doctorName" th:field="*{doctorName}" class="form-control" required />
+                <div th:if="${#fields.hasErrors('doctorName')}" th:errors="*{doctorName}" class="error"></div>
+            </div>
+
+            <!-- Specialization -->
+            <div class="form-group">
+                <label for="specialization">Specialization</label>
+                <input type="text" id="specialization" th:field="*{specialization}" class="form-control" required />
+                <div th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}" class="error"></div>
+            </div>
+
+            <!-- Qualification -->
+            <div class="form-group">
+                <label for="qualification">Qualification</label>
+                <input type="text" id="qualification" th:field="*{qualification}" class="form-control" required />
+                <div th:if="${#fields.hasErrors('qualification')}" th:errors="*{qualification}" class="error"></div>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="form-group">
+                <label for="contactNumber">Contact Number</label>
+                <input type="text" id="contactNumber" th:field="*{contactNumber}" class="form-control" required />
+                <div th:if="${#fields.hasErrors('contactNumber')}" th:errors="*{contactNumber}" class="error"></div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="emailId">Email ID</label>
+                <input type="email" id="emailId" th:field="*{emailId}" class="form-control" required />
+                <div th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}" class="error"></div>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" th:field="*{gender}" class="form-control" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="error"></div>
+            </div>
+
+            <!-- Location -->
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" th:field="*{location}" class="form-control" required />
+                <div th:if="${#fields.hasErrors('location')}" th:errors="*{location}" class="error"></div>
+            </div>
+
+            <!-- Consultation Fees -->
+            <div class="form-group">
+                <label for="consultationFees">Consultation Fees</label>
+                <input type="number" id="consultationFees" th:field="*{consultationFees}" class="form-control" required />
+                <div th:if="${#fields.hasErrors('consultationFees')}" th:errors="*{consultationFees}" class="error"></div>
+            </div>
+
+            <!-- Date of Joining -->
+            <div class="form-group">
+                <label for="dateOfJoining">Date of Joining</label>
+                <input type="date" id="dateOfJoining" th:field="*{dateOfJoining}" class="form-control" required />
+                <div th:if="${#fields.hasErrors('dateOfJoining')}" th:errors="*{dateOfJoining}" class="error"></div>
+            </div>
+
+            <!-- Years of Experience -->
+            <div class="form-group">
+                <label for="yearsOfExperience">Years of Experience</label>
+                <input type="number" id="yearsOfExperience" th:field="*{yearsOfExperience}" class="form-control" required />
+                <div th:if="${#fields.hasErrors('yearsOfExperience')}" th:errors="*{yearsOfExperience}" class="error"></div>
+            </div>
+
+            <!-- Is Surgeon -->
+            <div class="form-group">
+                <label for="Surgeon">Is Surgeon:</label>
+                <input type="checkbox" id="Surgeon" th:field="*{Surgeon}" />
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Add Doctor</button>
+        </form>
+    </div>
+	<div class="navigation">
+				            <a th:href="@{/admin}" class="back-home">Back to Home</a>
+				 </div>
+
+</body>
+</html>
+
+
+

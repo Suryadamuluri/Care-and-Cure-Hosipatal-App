@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Results</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Patient Search Results</h1>
+
+    <!-- Error Message -->
+    <div th:if="${error}">
+        <p class="error" th:text="${error}"></p>
+    </div>
+
+    <!-- Patient List -->
+    <div th:if="${patients}">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Email ID</th>
+                    <th>Location</th>
+                    <th>Allergies</th>
+                    <th>Medical History</th>
+                    <th>Medications</th>
+                    <th>Treatments</th>
+                    <th>Other Notes</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="patient : ${patients}">
+                    <td th:text="${patient.patientId}"></td>
+                    <td th:text="${patient.patientName}"></td>
+                    <td th:text="${patient.contactNumber}"></td>
+                    <td th:text="${patient.dateOfBirth}"></td>
+                    <td th:text="${patient.gender}"></td>
+                    <td th:text="${patient.emailId}"></td>
+                    <td th:text="${patient.location}"></td>
+                    <td th:text="${patient.allergies}"></td>
+                    <td th:text="${patient.medicalHistory}"></td>
+                    <td th:text="${patient.medications}"></td>
+                    <td th:text="${patient.treatments}"></td>
+                    <td th:text="${patient.others}"></td>
+                    <td th:text="${patient.status}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- No Patients Found -->
+    <div th:if="${patients.empty}">
+        <p>No patients found for the given medical history.</p>
+    </div>
+	
+	<a href="/admin/patientinfo" >Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patient Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Patient Details</h2>
+        
+        <!-- Error message -->
+        <div th:if="${error}" class="text-danger">
+            <p th:text="${error}"></p> <!-- Display the error message -->
+        </div>
+        
+        <!-- Patient Details -->
+        <div th:if="${patient}">
+            <table class="table table-bordered">
+                <thead>
+                    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Name</strong></td>
+                        <td><span th:text="${patient.patientName}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contact Number</strong></td>
+                        <td><span th:text="${patient.contactNumber}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date of Birth</strong></td>
+                        <td><span th:text="${patient.dateOfBirth}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gender</strong></td>
+                        <td><span th:text="${patient.gender}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Allergies</strong></td>
+                        <td><span th:text="${patient.allergies}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Medications</strong></td>
+                        <td><span th:text="${patient.medications}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Location</strong></td>
+                        <td><span th:text="${patient.location}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email ID</strong></td>
+                        <td><span th:text="${patient.emailId}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Medical History</strong></td>
+                        <td><span th:text="${patient.medicalHistory}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Others</strong></td>
+                        <td><span th:text="${patient.others}"></span></td>
+                    </tr>
+                </tr>
+                <td><strong>Status</strong></td>
+                 <td><span th:text="${patient.status}"></span></td>
+               </tr>
+                       >
+                    
+                </tbody>
+            </table>
+        </div>
+
+		<div class="navigation">
+					<a th:href="${role == 'admin' ? '/admin/patientinfo' : '/patient'}" class="back-home">Back to Home</a>
+						 </div>
+    </div>
+</body>
+</html>

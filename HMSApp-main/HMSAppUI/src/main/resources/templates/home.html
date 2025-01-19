@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <!-- Add Bootstrap CSS if using Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <h1>Patient Module</h1>
+    <a th:href="@{/addPatientForm}" class="btn">Add Patient</a><br>
+    <a th:href="@{/viewAllPatients}" class="btn">View All Patients</a><br>
+    <a th:href="@{/viewPatientByIdForm}" class="btn">View Patient By ID</a><br>
+    <a th:href="@{/viewPatientByNameForm}" class="btn">View Patient By Name</a><br>
+    <a th:href="@{/updatePatientForm}" class="btn">Go to Update Patient</a><br>
+    <a th:href="@{/viewPatientsByDoctorAndDateForm}" class="btn">View Patients by Doctor and Date</a><br>
+    <a th:href="@{/no-show-patients}" class="btn">No-Show Patients Report</a><br>
+    <a th:href="@{/viewPatientByMedicalHistoryForm}" class="btn">View Patients by Medical History</a><br>
+
+    <h2>Billing Module</h2>
+    <a th:href="@{/addBillForm}" class="btn">Add Bill</a><br>
+    <a th:href="@{/viewBills}" class="btn">View Bills</a><br>
+    <a th:href="@{/patient/{patientId}/pending(patientId=201)}" class="btn">View Pending Bills</a><br>
+
+    <div th:if="${message}">
+        <p th:text="${message}" class="alert alert-info"></p>
+    </div>
+</body>
+</html>

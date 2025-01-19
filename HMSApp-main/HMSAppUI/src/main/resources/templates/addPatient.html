@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Patient</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+        }
+
+        .form-check-label {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Add Patient</h2>
+            <form th:action="@{/addPatients}" method="post" th:object="${patient}">
+                <!-- Patient Name -->
+                <div class="form-group">
+                    <label for="patientName">Name:</label>
+                    <input type="text" class="form-control" id="patientName" th:field="*{patientName}" required>
+                    <div th:if="${#fields.hasErrors('patientName')}" th:errors="*{patientName}" class="error-message"></div>
+                </div>
+
+                <!-- Contact Number -->
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number:</label>
+                    <input type="text" class="form-control" id="contactNumber" th:field="*{contactNumber}" required>
+                    <div th:if="${#fields.hasErrors('contactNumber')}" th:errors="*{contactNumber}" class="error-message"></div>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth:</label>
+                    <input type="date" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}" required>
+                    <div th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" class="error-message"></div>
+                </div>
+
+                <!-- Gender -->
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" th:field="*{gender}" required>
+                            <label class="form-check-label" for="genderMale">Male</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female" th:field="*{gender}" required>
+                            <label class="form-check-label" for="genderFemale">Female</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="genderOther" value="Other" th:field="*{gender}" required>
+                            <label class="form-check-label" for="genderOther">Other</label>
+                        </div>
+                    </div>
+                    <div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="error-message"></div>
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" th:field="*{location}">
+                    <div th:if="${#fields.hasErrors('location')}" th:errors="*{location}" class="error-message"></div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="emailId">Email ID:</label>
+                    <input type="email" class="form-control" id="emailId" th:field="*{emailId}">
+                    <div th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}" class="error-message"></div>
+                </div>
+
+                <!-- Allergies (Optional) -->
+                <div class="form-group">
+                    <label for="allergies">Allergies:</label>
+                    <input type="text" class="form-control" id="allergies" th:field="*{allergies}">
+                    <div th:if="${#fields.hasErrors('allergies')}" th:errors="*{allergies}" class="error-message"></div>
+                </div>
+
+                <!-- Medications (Optional) -->
+                <div class="form-group">
+                    <label for="medications">Medications:</label>
+                    <input type="text" class="form-control" id="medications" th:field="*{medications}">
+                    <div th:if="${#fields.hasErrors('medications')}" th:errors="*{medications}" class="error-message"></div>
+                </div>
+
+                <!-- Treatments (Optional) -->
+                <div class="form-group">
+                    <label for="treatments">Treatments:</label>
+                    <input type="text" class="form-control" id="treatments" th:field="*{treatments}">
+                    <div th:if="${#fields.hasErrors('treatments')}" th:errors="*{treatments}" class="error-message"></div>
+                </div>
+
+                <!-- Medical History (Optional) -->
+                <div class="form-group">
+                    <label for="medicalHistory">Medical History:</label>
+                    <input type="text" class="form-control" id="medicalHistory" th:field="*{medicalHistory}">
+                    <div th:if="${#fields.hasErrors('medicalHistory')}" th:errors="*{medicalHistory}" class="error-message"></div>
+                </div>
+
+                <!-- Others (Optional) -->
+                <div class="form-group">
+                    <label for="others">Others:</label>
+                    <input type="text" class="form-control" id="others" th:field="*{others}">
+                    <div th:if="${#fields.hasErrors('others')}" th:errors="*{others}" class="error-message"></div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-primary">Add Patient</button>
+                    <a href="/patient/patientinfo" class="btn btn-secondary">Back to Home</a>
+                </div>
+
+                <!-- Success Message -->
+                <div th:if="${message}" class="alert alert-success mt-3">
+                    <p th:text="${message}"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+	
+</body>
+</html>

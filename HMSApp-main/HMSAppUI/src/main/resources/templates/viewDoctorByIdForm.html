@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            padding: 8px;
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .doctor-details {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .doctor-details p {
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+        .doctor-details span {
+            font-weight: bold;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2>View Doctor by ID</h2>
+
+<form th:action="@{/viewDoctorById}" method="get">
+    <label for="doctorId">Doctor ID:</label>
+    <input type="number" name="doctorId" required placeholder="Enter Doctor ID" /><br>
+    <button type="submit">View Doctor</button>
+</form>
+
+<div th:if="${doctor != null}" class="doctor-details">
+	<h3>Doctor Details:</h3>
+	<table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+	    <tr>
+	        <th style="text-align: left;">Name</th>
+	        <td><span th:text="${doctor.doctorName}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Specialization</th>
+	        <td><span th:text="${doctor.specialization}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Qualification</th>
+	        <td><span th:text="${doctor.qualification}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Contact Number</th>
+	        <td><span th:text="${doctor.contactNumber}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Email</th>
+	        <td><span th:text="${doctor.emailId}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Gender</th>
+	        <td><span th:text="${doctor.gender}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Location</th>
+	        <td><span th:text="${doctor.location}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Consultation Fees</th>
+	        <td><span th:text="${doctor.consultationFees}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Date of Joining</th>
+	        <td><span th:text="${doctor.dateOfJoining}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Is Surgeon</th>
+	        <td><span th:text="${doctor.surgeon ? 'Yes' : 'No'}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Years of Experience</th>
+	        <td><span th:text="${doctor.yearsOfExperience}"></span></td>
+	    </tr>
+	    <tr>
+	        <th style="text-align: left;">Status</th>
+	        <td><span th:text="${doctor.status ? 'Active' : 'Inactive'}"></span></td>
+	    </tr>
+	</table>
+</div>
+
+<div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}"></p>
+</div>
+<div class="navigation">
+				            <a th:href="@{/admin}" class="back-home">Back to Home</a>
+		 </div>
+
+</body>
+</html>
+

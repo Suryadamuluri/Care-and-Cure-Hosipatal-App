@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f7f7f7;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Appointment</h1>
+	<div th:if="${errorMessage}" style="color: red;">
+	       <p th:text="${errorMessage}"></p>
+	   </div>
+
+	   <!-- Display success message -->
+	   <div th:if="${message}" style="color: green;">
+	       <p th:text="${message}"></p>
+	   </div>
+    <form th:action="@{/updateAppointment}" th:object="${appointment}" method="post" >
+        <label for="appointmentId">Appointment ID</label>
+        <input type="text" th:field="*{appointmentId}" placeholder="Enter Appointment ID" required />
+
+        <label for="doctorReport">Doctor Report</label>
+        <textarea th:field="*{doctorReport}" placeholder="Enter Doctor Report" required></textarea>
+
+        <label for="medicinesSuggested">Medicines Suggested</label>
+        <textarea th:field="*{medicineSuggested}" placeholder="Enter Medicines Suggested" required></textarea>
+
+        <button type="submit">Update Appointment</button>
+    </form>
+	
+</body>
+</html>

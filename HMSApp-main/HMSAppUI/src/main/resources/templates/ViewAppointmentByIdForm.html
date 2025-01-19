@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Appointment by ID</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f7fc;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            margin-right: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .appointment-table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .appointment-table th, .appointment-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .appointment-table th {
+            background-color: steelblue;
+            color: white;
+        }
+        .appointment-table td {
+            background-color: #f9f9f9;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .back-link a {
+            color: blue;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>View Appointment by ID</h1>
+
+    <!-- Form to get Appointment ID -->
+    <form th:action="@{/viewAppointmentById}" method="get">
+        <label for="appointmentId">Enter Appointment ID:</label>
+        <input type="text" id="appointmentId" name="appointmentId" required>
+        <button type="submit">View Appointment</button>
+    </form>
+
+    <!-- Display the appointment details -->
+    <div th:if="${appointment}">
+        <h2>Appointment Details</h2>
+        <table class="appointment-table">
+            <tr>
+                <th>ID</th>
+                <td th:text="${appointment.appointmentId}"></td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td th:text="${appointment.appointmentDate}"></td>
+            </tr>
+            <tr>
+                <th>Start Time</th>
+                <td th:text="${appointment.startTime}"></td>
+            </tr>
+            <tr>
+                <th>End Time</th>
+                <td th:text="${appointment.endTime}"></td>
+            </tr>
+            <tr>
+                <th>Reason for Visit</th>
+                <td th:text="${appointment.reasonForVisit}"></td>
+            </tr>
+        </table>
+		<div class="back-link">
+		        <a th:href="@{/}">Back to Home</a>
+		    </div>
+    </div>
+
+    <!-- Display message if no appointment is found -->
+    <div th:if="${errorMessage}" class="error-message">
+        <p th:text="${errorMessage}"></p>
+		<div class="back-link">
+				        <a th:href="@{/AppointmentHome}">Back to Home</a>
+				    </div>
+    </div>
+
+    <!-- Link to go back -->
+    
+</body>
+</html>
